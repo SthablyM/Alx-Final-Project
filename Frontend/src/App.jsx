@@ -1,28 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './Dashboard';
+import LandingPage from './LandingPage';
 import Login from './Login';
 import Signup from './Signup';
-import Header from './Header';
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(true);
-
-  const switchToSignup = () => setIsLogin(false);
-  const switchToLogin = () => setIsLogin(true);
-
   return (
-    <div style={styles.app}>
-      <Header /> {/* Adding the Header component here */}
-      {isLogin ? (
-        <Login switchToSignup={switchToSignup} />
-      ) : (
-        <Signup switchToLogin={switchToLogin} />
-      )}
-    </div>
-  );
-};
+    <Router>
+      <div>
+        <Routes>
+          {/* Route for Landing Page */}
+          <Route path="/" element={<LandingPage />} />
 
-const styles = {
-  app: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f0f0f0', flexDirection: 'column' },
+          {/* Route for Login Page */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Route for Signup Page */}
+          <Route path="/signup" element={<Signup />} />
+
+          {/* Route for Dashboard */}
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 };
 
 export default App;
